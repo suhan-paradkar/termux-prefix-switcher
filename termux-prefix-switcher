@@ -1,5 +1,5 @@
 #!/bin/bash
-# Termux Prefix Switcher 
+# Termux Prefix Switcher
 # This Program will switch Termux Environment from 64-bit to 32-bit
 
 # Android 5/6 isn't supported currently
@@ -27,7 +27,7 @@ print-help(){
 	 help - show this help
 	 switch - Switches to 32-bit Mode
 	 revert - Reverts to 64-bit Mode (This Uninstalls 32-bit prefix)
-	
+
 	NOTE: Switching to 32-bit will not install packages automatically so you have to install them again if possible
 
 	Termux Prefix Switcher (version 1.0)
@@ -51,7 +51,7 @@ switch(){
 
 	* Inconsistency will occur when running 64-bit on 32-bit environment, in some cases with the preloaded termux-exec library, you can usually unset it
 
-	* When Running Chromium in 32-bit proot'ed linux environment, expect segmentation failures (even with --no-sandbox) option, 
+	* When Running Chromium in 32-bit proot'ed linux environment, expect segmentation failures (even with --no-sandbox) option,
 
 	* This Script will not track what packages you've installed, so you will need to reinstall them again if possible
 
@@ -64,13 +64,13 @@ switch(){
 		aarch64)
 			curl --fail --location --output $TEMPDIR/termux-bootstrap.zip.part "$BOOTSTRAP_ARM"
 			;;
-		x86_64) 
+		x86_64)
 			curl --fail --location --output $TEMPDIR/termux-bootstrap.zip.part "$BOOTSTRAP_INTEL"
 			;;
 		*)
 			exit 2
 	esac
-	
+
 	# Check if file is downloaded properly
 	if [ -e $TEMPDIR/termux-bootstrap.zip.part ]; then
 		mv $TEMPDIR/termux-bootstrap.zip.part $TEMPDIR/termux-bootstrap.zip
@@ -85,7 +85,7 @@ switch(){
 	chmod 755 usr -R ||:
 	rm -rf $PREFIX/../usr32-staging
 	unzip -d $PREFIX/../usr32-staging $TEMPDIR/termux-bootstrap.zip
-	
+
 	# Process Symlinks
 	echo "[*] Processing Symlinks"
 	cd $PREFIX/../usr32-staging
@@ -134,25 +134,25 @@ revert(){
 
 	# Switch back to 64-bit
 	cd $PREFIX/..
-	
+
 	# Check if Backup File Exists
 	if [ ! -e usr64-backup ]; then
 		echo "[!] The Backup Directory isn't exists.. Continuing Anyway!"
 	fi
-	
+
 	# Revert Back to 64-bit
 	echo "[*] Purging 32-bit environment"
 	cat > purge-prefix.sh <<- EOM
 	#!/system/bin/sh
 	chmod 755 usr -R ||:
 	rm -rf usr
-	
+
 	# Restore Backup directory if possible"
 	if [ -e usr64-backup ]; then
 		echo "[*] Restoring 64-bit Prefix"
 		mv usr64-backup usr
 	fi
-	
+
 	rm -rf purge-prefix.sh
 
 	echo "[✓] Done, Please Close and Reopen the app"
