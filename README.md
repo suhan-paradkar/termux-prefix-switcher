@@ -47,3 +47,11 @@ If you feel happy with 32-bit and you want to save space on your device, you can
 *However if running it under proot, well you probably need to run 32-bit instead of 64-bit*
 
 * Running Chromium in 32-bit Linux Distro, you will get segmentation failures, although a successful workaround has been stated [here](https://github.com/termux/proot/issues/107)
+
+# Installation
+
+Copy
+```
+wget https://github.com/suhan-paradkar/termux-prefix-switcher/releases/download/v1.0/termux-prefix-switcher_1.0_all.deb
+dpkg -i termux-prefix-switcher_1.0_all.deb
+```
