@@ -30,7 +30,7 @@ print-help(){
 
 	NOTE: Switching to 32-bit will not install packages automatically so you have to install them again if possible
 
-	Termux Prefix Switcher (version 1.0)
+	Termux Prefix Switcher (version 1.1)
 	EOM
 }
 
